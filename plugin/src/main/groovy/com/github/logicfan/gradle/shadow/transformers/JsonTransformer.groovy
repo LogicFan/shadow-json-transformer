@@ -1,6 +1,5 @@
 package com.github.logicfan.gradle.shadow.transformers
 
-import com.google.gson.JsonParser
 import org.gradle.api.file.FileTreeElement
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -10,18 +9,23 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.google.gson.JsonElement
-import com.google.gson.Gson
 import com.google.gson.JsonPrimitive
+import com.google.gson.JsonParser
+import com.google.gson.Gson
+
 import shadow.org.apache.tools.zip.ZipOutputStream
 import shadow.org.apache.tools.zip.ZipEntry
+
 import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
 import com.github.jengelman.gradle.plugins.shadow.transformers.TransformerContext
+import com.github.jengelman.gradle.plugins.shadow.transformers.CacheableTransformer
 
 /**
  * Merge multiple occurrence of json file
  *
  * @author Logic Fan
  */
+@CacheableTransformer
 class JsonTransformer implements Transformer {
     static final GSON = new Gson()
     static final LOGGER = LoggerFactory.getLogger(JsonTransformer.class)
