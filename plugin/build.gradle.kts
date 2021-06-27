@@ -7,20 +7,22 @@
  */
 
 plugins {
-    // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
-
-    // Apply the Groovy plugin to add support for Groovy
     groovy
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
+    gradlePluginPortal()
 }
 
+val shadowVersion = "7.0.0"
+
 dependencies {
-    // Use the awesome Spock testing and specification framework
+    implementation(gradleApi())
+    implementation(localGroovy())
+    implementation("gradle.plugin.com.github.jengelman.gradle.plugins:shadow:$shadowVersion")
+
     testImplementation("org.spockframework:spock-core:2.0-M4-groovy-3.0")
 }
 
@@ -30,25 +32,6 @@ gradlePlugin {
         id = "com.github.logicfan.gradle.shadow.greeting"
         implementationClass = "com.github.logicfan.gradle.shadow.ShadowJsonTransformerPlugin"
     }
-}
-
-// Add a source set for the functional test suite
-val functionalTestSourceSet = sourceSets.create("functionalTest") {
-}
-
-gradlePlugin.testSourceSets(functionalTestSourceSet)
-configurations["functionalTestImplementation"].extendsFrom(configurations["testImplementation"])
-
-// Add a task to run the functional tests
-val functionalTest by tasks.registering(Test::class) {
-    testClassesDirs = functionalTestSourceSet.output.classesDirs
-    classpath = functionalTestSourceSet.runtimeClasspath
-    useJUnitPlatform()
-}
-
-tasks.check {
-    // Run the functional tests as part of `check`
-    dependsOn(functionalTest)
 }
 
 tasks.test {

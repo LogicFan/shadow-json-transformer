@@ -11,11 +11,6 @@ import org.gradle.api.Plugin
  */
 class ShadowJsonTransformerPlugin implements Plugin<Project> {
     void apply(Project project) {
-        // Register a task
-        project.tasks.register("greeting") {
-            doLast {
-                println("Hello from plugin 'com.github.logicfan.gradle.shadow.greeting'")
-            }
-        }
+        // do nothing.
     }
 }
