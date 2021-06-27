@@ -22,6 +22,7 @@ dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
     implementation("gradle.plugin.com.github.jengelman.gradle.plugins:shadow:$shadowVersion")
+    implementation("com.google.code.gson:gson:2.8.7")
 
     testImplementation("org.spockframework:spock-core:2.0-M4-groovy-3.0")
 }
