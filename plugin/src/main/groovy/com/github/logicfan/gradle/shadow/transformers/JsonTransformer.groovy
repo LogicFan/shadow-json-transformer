@@ -1,21 +1,21 @@
 package com.github.logicfan.gradle.shadow.transformers
 
-import com.google.gson.JsonPrimitive
+import com.google.gson.JsonParser
 import org.gradle.api.file.FileTreeElement
-import org.gradle.api.logging.Logger
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.slf4j.LoggerFactory
+
 import com.google.gson.JsonArray
 import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.google.gson.JsonElement
 import com.google.gson.Gson
-
-import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
-import com.github.jengelman.gradle.plugins.shadow.transformers.TransformerContext
+import com.google.gson.JsonPrimitive
 import shadow.org.apache.tools.zip.ZipOutputStream
 import shadow.org.apache.tools.zip.ZipEntry
+import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.TransformerContext
 
 /**
  * Merge multiple occurrence of json file
@@ -23,8 +23,8 @@ import shadow.org.apache.tools.zip.ZipEntry
  * @author Logic Fan
  */
 class JsonTransformer implements Transformer {
-    static final Gson GSON = new Gson()
-    static final Logger LOGGER = LoggerFactory.getLogger(JsonTransformer.class)
+    static final GSON = new Gson()
+    static final LOGGER = LoggerFactory.getLogger(JsonTransformer.class)
 
     @Optional
     @Input
@@ -40,7 +40,14 @@ class JsonTransformer implements Transformer {
 
     @Override
     void transform(TransformerContext context) {
+        JsonElement j
+        try {
+            j = JsonParser.parseReader(new InputStreamReader(context.is, "UTF-8"))
+        } catch (Exception e) {
+            throw new RuntimeException("error on processing json", e)
+        }
 
+        json = (json == null) ? j : mergeJson(json, j)
     }
 
     @Override
