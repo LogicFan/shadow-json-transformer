@@ -36,7 +36,7 @@ gradlePlugin {
 
 pluginBundle {
     website = "https://github.com/LogicFan/shadow-json-transformer"
-    version = "1.0.0"
+    version = "1.0.1"
     vcsUrl = "https://github.com/LogicFan/shadow-json-transformer"
     tags = listOf("shadow", "json")
 }
@@ -52,7 +52,7 @@ publishing {
         withType(MavenPublication::class) {
             groupId = "shadow.json-transformer"
             artifactId = "shadow.json-transformer.gradle.plugin"
-            version = "1.0.0"
+            version = "1.0.1"
         }
     }
 }
