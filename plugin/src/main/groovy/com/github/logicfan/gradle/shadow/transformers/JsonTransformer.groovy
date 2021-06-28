@@ -1,9 +1,9 @@
 package com.github.logicfan.gradle.shadow.transformers
 
 import org.gradle.api.file.FileTreeElement
+import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
-import org.slf4j.LoggerFactory
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonNull
@@ -28,7 +28,7 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.CacheableTransfor
 @CacheableTransformer
 class JsonTransformer implements Transformer {
     static final GSON = new Gson()
-    static final LOGGER = LoggerFactory.getLogger(JsonTransformer.class)
+    static final LOGGER = Logging.getLogger(JsonTransformer.class)
 
     @Optional
     @Input
