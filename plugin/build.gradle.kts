@@ -26,7 +26,7 @@ dependencies {
 gradlePlugin {
     plugins {
         create("shadowJsonTransformer") {
-            id = "shadow.json-transformer"
+            id = "com.github.logicfan.gradle.shadow.json-transformer"
             displayName = "Plugin adding json transformer on shadowJar"
             description = "a plugin add json transformer on shadowJar"
             implementationClass = "com.github.logicfan.gradle.shadow.ShadowJsonTransformerPlugin"
@@ -50,8 +50,8 @@ publishing {
 
     publications {
         withType(MavenPublication::class) {
-            groupId = "shadow.json-transformer"
-            artifactId = "shadow.json-transformer.gradle.plugin"
+            groupId = "com.github.logicfan.gradle.shadow.json-transformer"
+            artifactId = "shadow.json-transformer"
             version = "1.0.1"
         }
     }
